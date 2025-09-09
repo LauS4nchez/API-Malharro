@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "imagens",
+  "info": {
+    "singularName": "imagen",
+    "pluralName": "imagens",
+    "displayName": "Imagen",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "imagen": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "imagenID": {
+      "type": "uid",
+      "required": true
+    }
+  }
+}

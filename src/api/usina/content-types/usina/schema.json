@@ -1,0 +1,40 @@
+{
+  "kind": "collectionType",
+  "collectionName": "usinas",
+  "info": {
+    "singularName": "usina",
+    "pluralName": "usinas",
+    "displayName": "Usina",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "nombre": {
+      "type": "string",
+      "required": true
+    },
+    "carrera": {
+      "type": "string",
+      "required": true
+    },
+    "link": {
+      "type": "string",
+      "required": true
+    },
+    "imagen": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ]
+    },
+    "usinaID": {
+      "type": "uid"
+    }
+  }
+}

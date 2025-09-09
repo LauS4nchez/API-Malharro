@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "collectionName": "carrusels",
+  "info": {
+    "singularName": "carrusel",
+    "pluralName": "carrusels",
+    "displayName": "Carrusel",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "carrusel": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "carruselID": {
+      "type": "uid"
+    },
+    "title": {
+      "type": "richtext"
+    }
+  }
+}

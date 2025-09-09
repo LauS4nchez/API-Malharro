@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "acordeons",
+  "info": {
+    "singularName": "acordeon",
+    "pluralName": "acordeons",
+    "displayName": "Acordeon",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "Label": {
+      "type": "string"
+    },
+    "textos": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::texto.texto",
+      "mappedBy": "acordeon"
+    },
+    "acordeonID": {
+      "type": "uid",
+      "required": true
+    }
+  }
+}

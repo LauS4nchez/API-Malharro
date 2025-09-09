@@ -1,0 +1,47 @@
+{
+  "kind": "collectionType",
+  "collectionName": "agendas",
+  "info": {
+    "singularName": "agenda",
+    "pluralName": "agendas",
+    "displayName": "Agenda",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "contenidoActividad": {
+      "type": "text",
+      "required": true
+    },
+    "imagen": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files"
+      ]
+    },
+    "tipoEvento": {
+      "type": "string",
+      "required": true
+    },
+    "etiquetas": {
+      "type": "string",
+      "required": true
+    },
+    "agendaID": {
+      "type": "uid"
+    },
+    "tituloActividad": {
+      "type": "richtext",
+      "required": true
+    },
+    "fecha": {
+      "type": "date",
+      "required": true
+    }
+  }
+}

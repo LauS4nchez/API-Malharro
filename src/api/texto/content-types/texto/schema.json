@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "textos",
+  "info": {
+    "singularName": "texto",
+    "pluralName": "textos",
+    "displayName": "Texto",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "textoID": {
+      "type": "uid",
+      "required": true
+    },
+    "acordeon": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::acordeon.acordeon",
+      "inversedBy": "textos"
+    },
+    "color": {
+      "type": "text",
+      "default": "#ffffff",
+      "maxLength": 7
+    },
+    "contenido": {
+      "type": "richtext",
+      "required": true
+    },
+    "titulo": {
+      "type": "string"
+    }
+  }
+}
