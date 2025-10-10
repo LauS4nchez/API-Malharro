@@ -1051,10 +1051,14 @@ export interface PluginUsersPermissionsUser
   };
   options: {
     draftAndPublish: false;
-    timestamps: true;
   };
   attributes: {
+    agenda: Schema.Attribute.Relation<'oneToMany', 'api::agenda.agenda'>;
     blocked: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    Carrera: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 20;
+      }>;
     confirmationToken: Schema.Attribute.String & Schema.Attribute.Private;
     confirmed: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     createdAt: Schema.Attribute.DateTime;
@@ -1071,6 +1075,10 @@ export interface PluginUsersPermissionsUser
       'plugin::users-permissions.user'
     > &
       Schema.Attribute.Private;
+    name: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 20;
+      }>;
     password: Schema.Attribute.Password &
       Schema.Attribute.Private &
       Schema.Attribute.SetMinMaxLength<{
@@ -1083,6 +1091,10 @@ export interface PluginUsersPermissionsUser
       'manyToOne',
       'plugin::users-permissions.role'
     >;
+    surname: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 30;
+      }>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
