@@ -13,4 +13,20 @@ export default ({ env }: { env: any }) => ({
       },
     },
   },
+  'users-permissions': {
+    config: {
+      jwt: {
+        expiresIn: '7d',
+      },
+      register: {
+        allowedFields: ['username', 'email', 'password'],
+      },
+      auth: {
+        events: {
+          onConnectionSuccess: (e: any) => console.log(e.user),
+          onConnectionError: (e: any) => console.error(e),
+        },
+      },
+    },
+  },
 });

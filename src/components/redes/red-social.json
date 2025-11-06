@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_redes_red_socials",
+  "info": {
+    "displayName": "red_social",
+    "icon": "twitter"
+  },
+  "options": {},
+  "attributes": {
+    "nombre": {
+      "type": "string"
+    },
+    "url": {
+      "type": "string"
+    },
+    "icono": {
+      "allowedTypes": [
+        "images",
+        "files"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}

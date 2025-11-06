@@ -65,6 +65,20 @@
       "inversedBy": "users",
       "configurable": false
     },
+    "googleId": {
+      "type": "string",
+      "unique": true,
+      "private": true,
+      "configurable": false
+    },
+    "discordId": {
+      "type": "string",
+      "unique": true,
+      "private": true
+    },
+    "discordUsername": {
+      "type": "string"
+    },
     "name": {
       "type": "string",
       "maxLength": 20
@@ -73,14 +87,54 @@
       "type": "string",
       "maxLength": 30
     },
-    "Carrera": {
+    "carrera": {
       "type": "string",
       "maxLength": 20
     },
-    "agenda": {
+    "usinas_creadas": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::agenda.agenda"
+      "target": "api::usina.usina",
+      "mappedBy": "creador"
+    },
+    "agendas_creadas": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::agenda.agenda",
+      "mappedBy": "creador"
+    },
+    "loginMethods": {
+      "type": "enumeration",
+      "enum": [
+        "password",
+        "google",
+        "discord",
+        "both"
+      ]
+    },
+    "avatar": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "files",
+        "images"
+      ]
+    },
+    "contacto": {
+      "type": "richtext"
+    },
+    "notificacionesEnviadas": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::notificacion.notificacion",
+      "mappedBy": "emisor"
+    },
+    "notificacionesRecibidas": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::notificacion.notificacion",
+      "mappedBy": "receptor"
     }
   }
 }

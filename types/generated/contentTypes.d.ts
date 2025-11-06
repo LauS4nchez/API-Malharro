@@ -413,11 +413,19 @@ export interface ApiAgendaAgenda extends Struct.CollectionTypeSchema {
   };
   attributes: {
     agendaID: Schema.Attribute.UID;
+    aprobado: Schema.Attribute.Enumeration<
+      ['aprobada', 'pendiente', 'rechazada']
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'pendiente'>;
     contenidoActividad: Schema.Attribute.Text & Schema.Attribute.Required;
+    creador: Schema.Attribute.Relation<
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    etiquetas: Schema.Attribute.String & Schema.Attribute.Required;
     fecha: Schema.Attribute.Date & Schema.Attribute.Required;
     imagen: Schema.Attribute.Media<'images' | 'files'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
@@ -426,9 +434,46 @@ export interface ApiAgendaAgenda extends Struct.CollectionTypeSchema {
       'api::agenda.agenda'
     > &
       Schema.Attribute.Private;
+    notificaciones: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::notificacion.notificacion'
+    >;
     publishedAt: Schema.Attribute.DateTime;
-    tipoEvento: Schema.Attribute.String & Schema.Attribute.Required;
     tituloActividad: Schema.Attribute.RichText & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiCarreraCarrera extends Struct.CollectionTypeSchema {
+  collectionName: 'carreras';
+  info: {
+    displayName: 'Carrera';
+    pluralName: 'carreras';
+    singularName: 'carrera';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    ImagenDecoracion: Schema.Attribute.Media<'images' | 'files'>;
+    infoCarrera: Schema.Attribute.Relation<'oneToOne', 'api::texto.texto'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::carrera.carrera'
+    > &
+      Schema.Attribute.Private;
+    PlanEstudios: Schema.Attribute.Media<'files' | 'images'>;
+    PrimerParrafo: Schema.Attribute.RichText &
+      Schema.Attribute.DefaultTo<'--Sin Contenido--'>;
+    publishedAt: Schema.Attribute.DateTime;
+    SegundoParrafo: Schema.Attribute.RichText &
+      Schema.Attribute.DefaultTo<'--Sin Contenido--'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -469,6 +514,34 @@ export interface ApiCarruselCarrusel extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiDiscordAuthDiscordAuth extends Struct.CollectionTypeSchema {
+  collectionName: 'discord_auths';
+  info: {
+    displayName: 'Discord Auth';
+    pluralName: 'discord-auths';
+    singularName: 'discord-auth';
+  };
+  options: {
+    comment: '';
+    draftAndPublish: false;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::discord-auth.discord-auth'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiDocumentoDocumento extends Struct.CollectionTypeSchema {
   collectionName: 'documentos';
   info: {
@@ -495,6 +568,69 @@ export interface ApiDocumentoDocumento extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
     titulo: Schema.Attribute.RichText;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiFooterFooter extends Struct.SingleTypeSchema {
+  collectionName: 'footers';
+  info: {
+    description: '';
+    displayName: 'Footer';
+    pluralName: 'footers';
+    singularName: 'footer';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    direccion: Schema.Attribute.String;
+    img_ilustracion: Schema.Attribute.Media<'images' | 'files'>;
+    link_campus: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::footer.footer'
+    > &
+      Schema.Attribute.Private;
+    logo_principal: Schema.Attribute.Media<'images' | 'files'>;
+    mensaje_principal: Schema.Attribute.RichText;
+    publishedAt: Schema.Attribute.DateTime;
+    redes: Schema.Attribute.Component<'redes.red-social', true>;
+    texto_boton_campus: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiGoogleAuthGoogleAuth extends Struct.CollectionTypeSchema {
+  collectionName: 'google_auths';
+  info: {
+    displayName: 'Google Auth';
+    pluralName: 'google-auths';
+    singularName: 'google-auth';
+  };
+  options: {
+    comment: '';
+    draftAndPublish: false;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::google-auth.google-auth'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -531,6 +667,53 @@ export interface ApiImagenImagen extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiNotificacionNotificacion
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'notificaciones';
+  info: {
+    displayName: 'Notificaciones';
+    pluralName: 'notificaciones';
+    singularName: 'notificacion';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    agendaAfectada: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::agenda.agenda'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    emisor: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    fechaEmision: Schema.Attribute.DateTime;
+    leida: Schema.Attribute.Enumeration<['leida', 'no-leida']> &
+      Schema.Attribute.DefaultTo<'no-leida'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::notificacion.notificacion'
+    > &
+      Schema.Attribute.Private;
+    mensaje: Schema.Attribute.RichText;
+    publishedAt: Schema.Attribute.DateTime;
+    receptor: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    tipo: Schema.Attribute.Enumeration<['usina', 'agenda', 'sistema']>;
+    titulo: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    usinaAfectada: Schema.Attribute.Relation<'manyToOne', 'api::usina.usina'>;
+  };
+}
+
 export interface ApiTextoTexto extends Struct.CollectionTypeSchema {
   collectionName: 'textos';
   info: {
@@ -544,6 +727,7 @@ export interface ApiTextoTexto extends Struct.CollectionTypeSchema {
   };
   attributes: {
     acordeon: Schema.Attribute.Relation<'manyToOne', 'api::acordeon.acordeon'>;
+    carrera: Schema.Attribute.Relation<'oneToOne', 'api::carrera.carrera'>;
     color: Schema.Attribute.Text &
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 7;
@@ -558,6 +742,9 @@ export interface ApiTextoTexto extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
     textoID: Schema.Attribute.UID & Schema.Attribute.Required;
+    textoNegro: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<false>;
     titulo: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -577,18 +764,29 @@ export interface ApiUsinaUsina extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    carrera: Schema.Attribute.String & Schema.Attribute.Required;
+    aprobado: Schema.Attribute.Enumeration<
+      ['aprobada', 'pendiente', 'rechazada']
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'pendiente'>;
+    creador: Schema.Attribute.Relation<
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    imagen: Schema.Attribute.Media<'images' | 'files' | 'videos'> &
-      Schema.Attribute.Required;
-    link: Schema.Attribute.String & Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::usina.usina'> &
       Schema.Attribute.Private;
-    nombre: Schema.Attribute.String & Schema.Attribute.Required;
+    media: Schema.Attribute.Media<'images' | 'files' | 'videos'> &
+      Schema.Attribute.Required;
+    notificaciones: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::notificacion.notificacion'
+    >;
     publishedAt: Schema.Attribute.DateTime;
+    titulo: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1053,32 +1251,55 @@ export interface PluginUsersPermissionsUser
     draftAndPublish: false;
   };
   attributes: {
-    agenda: Schema.Attribute.Relation<'oneToMany', 'api::agenda.agenda'>;
+    agendas_creadas: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::agenda.agenda'
+    >;
+    avatar: Schema.Attribute.Media<'files' | 'images'>;
     blocked: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
-    Carrera: Schema.Attribute.String &
+    carrera: Schema.Attribute.String &
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 20;
       }>;
     confirmationToken: Schema.Attribute.String & Schema.Attribute.Private;
     confirmed: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    contacto: Schema.Attribute.RichText;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    discordId: Schema.Attribute.String &
+      Schema.Attribute.Private &
+      Schema.Attribute.Unique;
+    discordUsername: Schema.Attribute.String;
     email: Schema.Attribute.Email &
       Schema.Attribute.Required &
       Schema.Attribute.SetMinMaxLength<{
         minLength: 6;
       }>;
+    googleId: Schema.Attribute.String &
+      Schema.Attribute.Private &
+      Schema.Attribute.Unique;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'plugin::users-permissions.user'
     > &
       Schema.Attribute.Private;
+    loginMethods: Schema.Attribute.Enumeration<
+      ['password', 'google', 'discord', 'both']
+    >;
     name: Schema.Attribute.String &
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 20;
       }>;
+    notificacionesEnviadas: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::notificacion.notificacion'
+    >;
+    notificacionesRecibidas: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::notificacion.notificacion'
+    >;
     password: Schema.Attribute.Password &
       Schema.Attribute.Private &
       Schema.Attribute.SetMinMaxLength<{
@@ -1104,6 +1325,7 @@ export interface PluginUsersPermissionsUser
       Schema.Attribute.SetMinMaxLength<{
         minLength: 3;
       }>;
+    usinas_creadas: Schema.Attribute.Relation<'oneToMany', 'api::usina.usina'>;
   };
 }
 
@@ -1119,9 +1341,14 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::acordeon.acordeon': ApiAcordeonAcordeon;
       'api::agenda.agenda': ApiAgendaAgenda;
+      'api::carrera.carrera': ApiCarreraCarrera;
       'api::carrusel.carrusel': ApiCarruselCarrusel;
+      'api::discord-auth.discord-auth': ApiDiscordAuthDiscordAuth;
       'api::documento.documento': ApiDocumentoDocumento;
+      'api::footer.footer': ApiFooterFooter;
+      'api::google-auth.google-auth': ApiGoogleAuthGoogleAuth;
       'api::imagen.imagen': ApiImagenImagen;
+      'api::notificacion.notificacion': ApiNotificacionNotificacion;
       'api::texto.texto': ApiTextoTexto;
       'api::usina.usina': ApiUsinaUsina;
       'plugin::content-releases.release': PluginContentReleasesRelease;

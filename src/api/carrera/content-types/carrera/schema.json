@@ -1,0 +1,44 @@
+{
+  "kind": "collectionType",
+  "collectionName": "carreras",
+  "info": {
+    "singularName": "carrera",
+    "pluralName": "carreras",
+    "displayName": "Carrera"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "PrimerParrafo": {
+      "type": "richtext",
+      "default": "--Sin Contenido--"
+    },
+    "SegundoParrafo": {
+      "type": "richtext",
+      "default": "--Sin Contenido--"
+    },
+    "ImagenDecoracion": {
+      "allowedTypes": [
+        "images",
+        "files"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "PlanEstudios": {
+      "allowedTypes": [
+        "files",
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "infoCarrera": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::texto.texto",
+      "mappedBy": "carrera"
+    }
+  }
+}

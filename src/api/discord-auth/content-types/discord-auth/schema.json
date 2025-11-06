@@ -1,0 +1,14 @@
+{
+  "kind": "collectionType",
+  "collectionName": "discord_auths",
+  "info": {
+    "singularName": "discord-auth",
+    "pluralName": "discord-auths",
+    "displayName": "Discord Auth"
+  },
+  "options": {
+    "draftAndPublish": false,
+    "comment": ""
+  },
+  "attributes": {}
+}

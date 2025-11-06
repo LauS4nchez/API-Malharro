@@ -1,0 +1,61 @@
+{
+  "kind": "collectionType",
+  "collectionName": "notificaciones",
+  "info": {
+    "singularName": "notificacion",
+    "pluralName": "notificaciones",
+    "displayName": "Notificaciones"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "titulo": {
+      "type": "string",
+      "required": true
+    },
+    "mensaje": {
+      "type": "richtext"
+    },
+    "tipo": {
+      "type": "enumeration",
+      "enum": ["usina", "agenda", "sistema"]
+    },
+    "leida": {
+      "type": "enumeration",
+      "enum": ["leida", "no-leida"],
+      "default": "no-leida"
+    },
+    "fechaEmision": {
+      "type": "datetime"
+    },
+
+    "emisor": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user", 
+      "inversedBy": "notificacionesEnviadas"
+    },
+
+    "receptor": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "notificacionesRecibidas"
+    },
+
+    "usinaAfectada": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::usina.usina",
+      "inversedBy": "notificaciones"
+    },
+
+    "agendaAfectada": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::agenda.agenda",
+      "inversedBy": "notificaciones"
+    }
+  }
+}

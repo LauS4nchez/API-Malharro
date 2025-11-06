@@ -1,0 +1,51 @@
+{
+  "kind": "singleType",
+  "collectionName": "footers",
+  "info": {
+    "singularName": "footer",
+    "pluralName": "footers",
+    "displayName": "Footer",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "mensaje_principal": {
+      "type": "richtext"
+    },
+    "direccion": {
+      "type": "string"
+    },
+    "link_campus": {
+      "type": "string"
+    },
+    "texto_boton_campus": {
+      "type": "string"
+    },
+    "img_ilustracion": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files"
+      ]
+    },
+    "logo_principal": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files"
+      ]
+    },
+    "redes": {
+      "displayName": "red_social",
+      "type": "component",
+      "repeatable": true,
+      "component": "redes.red-social"
+    }
+  }
+}

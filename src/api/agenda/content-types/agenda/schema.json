@@ -19,18 +19,7 @@
       "type": "media",
       "multiple": false,
       "required": false,
-      "allowedTypes": [
-        "images",
-        "files"
-      ]
-    },
-    "tipoEvento": {
-      "type": "string",
-      "required": true
-    },
-    "etiquetas": {
-      "type": "string",
-      "required": true
+      "allowedTypes": ["images", "files"]
     },
     "agendaID": {
       "type": "uid"
@@ -42,6 +31,24 @@
     "fecha": {
       "type": "date",
       "required": true
+    },
+    "creador": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "agendas_creadas"
+    },
+    "aprobado": {
+      "type": "enumeration",
+      "enum": ["aprobada", "pendiente", "rechazada"],
+      "required": true,
+      "default": "pendiente"
+    },
+    "notificaciones": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::notificacion.notificacion",
+      "mappedBy": "agendaAfectada"
     }
   }
 }

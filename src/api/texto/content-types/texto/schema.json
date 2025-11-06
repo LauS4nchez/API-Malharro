@@ -32,6 +32,17 @@
     },
     "titulo": {
       "type": "string"
+    },
+    "textoNegro": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "carrera": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::carrera.carrera",
+      "inversedBy": "infoCarrera"
     }
   }
 }

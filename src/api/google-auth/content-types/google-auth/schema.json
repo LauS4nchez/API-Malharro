@@ -1,0 +1,14 @@
+{
+  "kind": "collectionType",
+  "collectionName": "google_auths",
+  "info": {
+    "singularName": "google-auth",
+    "pluralName": "google-auths",
+    "displayName": "Google Auth"
+  },
+  "options": {
+    "draftAndPublish": false,
+    "comment": ""
+  },
+  "attributes": {}
+}

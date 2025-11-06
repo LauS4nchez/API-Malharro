@@ -11,30 +11,36 @@
     "draftAndPublish": true
   },
   "attributes": {
-    "nombre": {
+    "titulo": {
       "type": "string",
       "required": true
     },
-    "carrera": {
-      "type": "string",
-      "required": true
-    },
-    "link": {
-      "type": "string",
-      "required": true
-    },
-    "imagen": {
+    "media": {
       "type": "media",
       "multiple": false,
       "required": true,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos"
-      ]
+      "allowedTypes": ["images", "files", "videos"]
     },
     "usinaID": {
       "type": "uid"
+    },
+    "aprobado": {
+      "type": "enumeration",
+      "enum": ["aprobada", "pendiente", "rechazada"],
+      "default": "pendiente",
+      "required": true
+    },
+    "creador": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "usinas_creadas"
+    },
+    "notificaciones": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::notificacion.notificacion",
+      "mappedBy": "usinaAfectada"
     }
   }
 }
